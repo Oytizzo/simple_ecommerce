@@ -14,3 +14,8 @@ def cart(request):
 def checkout(request):
     context = {}
     return render(request, 'ecom/checkout.html', context)
+
+
+def history(request):
+    context = {}
+    return render(request, 'ecom/history.html', context)
