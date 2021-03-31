@@ -42,6 +42,46 @@ body{
 	margin-top: 10px;
 }
 .price{
-    display: inline-block;
     float: right;
+}
+.btn-checkout{
+    float: right;
+}
+.cart-row{
+	display: flex;
+    align-items: flex-stretch;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+}
+.row-image{
+	width: 100px;
+}
+.quantity{
+	display: inline-block;
+	font-weight: 700;
+	padding-right:10px;
+}
+
+.chg-quantity{
+	width: 12px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+}
+.chg-quantity:hover{
+	opacity: .6;
+}
+.form-field{
+	width:250px;
+	display: inline-block;
+	padding: 5px;
+}
+.btn-block{
+    display: block;
+    width: 100%;
+}
+.hidden{
+	display: none!important;
 }
