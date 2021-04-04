@@ -7,7 +7,7 @@ for(var i = 0; i < updateBtns.length; i++){
         console.log('productId:', productId, 'action:', action)
 
         console.log('USER:', user)
-        if(user == 'AnonymousUser'){
+        if(user === 'AnonymousUser'){
             console.log('Not logged in')
         }
         else{
@@ -20,7 +20,7 @@ for(var i = 0; i < updateBtns.length; i++){
 function updateUserOrder(productId, action){
     console.log('User is logged in, sending data...')
 
-    var url = 'update_item/'
+    var url = '/update_item/'
 
     fetch(url, {
         method: 'POST',
