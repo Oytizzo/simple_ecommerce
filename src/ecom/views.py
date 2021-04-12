@@ -4,7 +4,7 @@ import json
 import datetime
 
 from .models import Product, Order, OrderItem, ShippingAddress
-from .utils import cookieCart, cartData
+from .utils import cookieCart, cartData, guestOrder
 
 def store(request):
     data = cartData(request)
@@ -91,31 +91,7 @@ def processOrder(request):
         
 
     else:
-        print('User is not logged in!')
-
-        print('COOKIES:', request.COOKIES)
-        name = data['form']['name']
-        email = data['form']['email']
-
-        cookieData = cookieCart(request)
-        items = cookieData['items']
-
-        customer, created = Customer.objects.get_or_create(
-            email=email
-        )
-        customer.name = name
-        customer.save()
-
-        order = Order.objects.create(
-            customer=customer, complete=False
-        )
-
-        for item in items:
-            product = Product.objects.get(id=item['product']['id'])
-
-            orderItem = OrderItem.objects.create(
-                product=product, order=order, quantity=item['quantity']
-            )
+        customer, order = guestOrder(request, data)
 
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
@@ -129,9 +105,9 @@ def processOrder(request):
             customer=customer,
             order=order,
             address=data['shipping']['address'],
-            city=data['shipping']['data'],
-            state=data['shipping']['data'],
-            zipcode=data['shipping']['data'],
+            city=data['shipping']['city'],
+            state=data['shipping']['state'],
+            zipcode=data['shipping']['zipcode'],
         )
 
     return JsonResponse('Payment complete!', safe=False)
